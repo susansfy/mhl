@@ -17,6 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 
+
 public class Window1 extends JFrame implements ActionListener,MouseListener{
 	
 	Image titleIcon,timeim,p1_bg;
@@ -35,6 +36,7 @@ public class Window1 extends JFrame implements ActionListener,MouseListener{
 	JLabel p2_label1,p2_label2;
 	ImageIcon p3_image1,p3_image2,p3_image3,p3_image4,p3_image5,p3_image6,p3_image7;
 	JLabel p3_label2,p3_label3,p3_label4,p3_label5,p3_label6,p3_label7,p3_label1;
+	JPanel p3_jp1;
 	JSplitPane jsp;
 	JLabel timeNow;
 	Cursor cs;
@@ -187,6 +189,7 @@ public class Window1 extends JFrame implements ActionListener,MouseListener{
 		p4 = new JPanel(new BorderLayout());
 		p2 = new JPanel(c1);
 		p3 = new JPanel(c2);
+		//p3.setPreferredSize(new Dimension(100,100));;
 		p4.add(p2,"West");
 		p4.add(p3,"Center");
 		
@@ -206,8 +209,11 @@ public class Window1 extends JFrame implements ActionListener,MouseListener{
 		p3_label5 = new JLabel(new ImageIcon("image\\jp3_test\\jp3_5.jpg"));
 		p3_label6 = new JLabel(new ImageIcon("image\\jp3_test\\jp3_6.jpg"));
 		p3_label7 = new JLabel(new ImageIcon("image\\jp3_test\\jp3_7.jpg"));
+		
+		p3_jp1 = new UserPage();
+		p3.add(p3_jp1,"1");
 
-		p3.add(p3_label1,"1");
+		//p3.add(p3_label1,"1");
 		p3.add(p3_label2,"2");
 		p3.add(p3_label3,"3");
 		p3.add(p3_label4,"4");

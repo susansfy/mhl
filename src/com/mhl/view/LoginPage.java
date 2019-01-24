@@ -122,7 +122,7 @@ public class LoginPage extends JDialog implements ActionListener{
 			String userid = jtf1.getText().toString();
 			String p = new String(this.jpf.getPassword());
 			
-			UserModel um=new UserModel();
+			LoginModel um=new LoginModel();
 			String position = um.checkUser(userid, p);
 			if(position.equals("经理") || position.equals("主管") ||position.equals("管理员"))
 			{

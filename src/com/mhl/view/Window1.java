@@ -2,6 +2,7 @@
  * 主菜单界面
  */
 package com.mhl.view;
+import com.mhl.model.UserModel;
 import com.mhl.tools.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -41,6 +42,7 @@ public class Window1 extends JFrame implements ActionListener,MouseListener{
 	JLabel timeNow;
 	Cursor cs;
 	javax.swing.Timer t;
+	boolean p4_flag = false;
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -187,6 +189,7 @@ public class Window1 extends JFrame implements ActionListener,MouseListener{
 		c1 = new CardLayout();
 		c2 = new CardLayout();
 		p4 = new JPanel(new BorderLayout());
+		//p4.setPreferredSize(new Dimension(100,100));
 		p2 = new JPanel(c1);
 		p3 = new JPanel(c2);
 		//p3.setPreferredSize(new Dimension(100,100));;
@@ -221,6 +224,8 @@ public class Window1 extends JFrame implements ActionListener,MouseListener{
 		p3.add(p3_label6,"6");
 		p3.add(p3_label7,"7");
 		
+		p4.setVisible(p4_flag);
+		
 		//拆分布局，放p1,p2,p3
 		jsp = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,true,p1,p4);
 		jsp.setDividerLocation(120);
@@ -239,6 +244,7 @@ public class Window1 extends JFrame implements ActionListener,MouseListener{
 		}
 		
 		this.menu();
+		
 		
 		this.tool_bar();
 		
@@ -290,6 +296,8 @@ public class Window1 extends JFrame implements ActionListener,MouseListener{
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		this.timeNow.setText("当前时间："+Calendar.getInstance().getTime().toString());
+		
+				
 	}
 
 	@Override

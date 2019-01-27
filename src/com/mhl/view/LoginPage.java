@@ -23,10 +23,10 @@ public class LoginPage extends JDialog implements ActionListener{
 	Image img;
 	int width,height;
 	
-	public static void main(String[] args)
-	{
-		LoginPage lp=new LoginPage();
-	}
+//	public static void main(String[] args)
+//	{
+//		LoginPage lp=new LoginPage();
+//	}
 	
 	public LoginPage() 
 	{

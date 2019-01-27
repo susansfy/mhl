@@ -7,6 +7,8 @@ import com.mhl.tools.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.Timer;
+import javax.swing.event.MenuEvent;
+import javax.swing.event.MenuListener;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -22,6 +24,7 @@ import java.util.*;
 public class Window1 extends JFrame implements ActionListener,MouseListener{
 	
 	Image titleIcon,timeim,p1_bg;
+	
 	JMenuBar jmb;
 	JMenu jm1,jm2,jm3,jm4,jm5,jm6;
 	JMenuItem jmt1,jmt2,jmt3,jmt4,jmt5,jmt6,jmt7,jmt8,jmt9,jmt10;
@@ -43,6 +46,9 @@ public class Window1 extends JFrame implements ActionListener,MouseListener{
 	Cursor cs;
 	javax.swing.Timer t;
 	boolean p4_flag = false;
+	Container c;
+	
+	String selecteditem;
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -58,18 +64,23 @@ public class Window1 extends JFrame implements ActionListener,MouseListener{
 		jm1_icon1 = new ImageIcon("image\\jm1_icon1.jpg");
 		jmt1 = new JMenuItem("切换用户",jm1_icon1);
 		jmt1.setFont(MyTools.f2);
+		jmt1.addActionListener(this);
 		jm1_icon2 = new ImageIcon("image\\jm1_icon2.jpg");
 		jmt2 = new JMenuItem("切换到收款界面",jm1_icon2);
 		jmt2.setFont(MyTools.f2);
+		jmt2.addActionListener(this);
 		jm1_icon3 = new ImageIcon("image\\jm1_icon3.jpg");
 		jmt3 = new JMenuItem("登录管理",jm1_icon3);
 		jmt3.setFont(MyTools.f2);
+		jmt3.addActionListener(this);
 		jm1_icon4 = new ImageIcon("image\\jm1_icon4.jpg");
 		jmt4 = new JMenuItem("万年历",jm1_icon4);
 		jmt4.setFont(MyTools.f2);
+		jmt4.addActionListener(this);
 		jm1_icon5 = new ImageIcon("image\\jm1_icon5.jpg");
 		jmt5 = new JMenuItem("退出",jm1_icon5);
 		jmt5.setFont(MyTools.f2);
+		jmt5.addActionListener(this);
 		
 		//加入
 		jm1.add(jmt1);
@@ -97,6 +108,7 @@ public class Window1 extends JFrame implements ActionListener,MouseListener{
 		jmb.add(jm4);
 		jmb.add(jm5);
 		jmb.add(jm6);
+		
 		//菜单直接加到JFrame中
 		this.setJMenuBar(jmb);
 	}
@@ -107,7 +119,9 @@ public class Window1 extends JFrame implements ActionListener,MouseListener{
 		jtb = new JToolBar();
 		//设置工具栏不可移动
 		jtb.setFloatable(false);
+		
 		jb1 = new JButton(new ImageIcon("image\\toolBar_image\\jb1.jpg"));
+		jb1.addActionListener(this);
 		jb2 = new JButton(new ImageIcon("image\\toolBar_image\\jb2.jpg"));
 		jb3 = new JButton(new ImageIcon("image\\toolBar_image\\jb3.jpg"));
 		jb4 = new JButton(new ImageIcon("image\\toolBar_image\\jb4.jpg"));
@@ -117,6 +131,7 @@ public class Window1 extends JFrame implements ActionListener,MouseListener{
 		jb8 = new JButton(new ImageIcon("image\\toolBar_image\\jb8.jpg"));
 		jb9 = new JButton(new ImageIcon("image\\toolBar_image\\jb9.jpg"));
 		jb10 = new JButton(new ImageIcon("image\\toolBar_image\\jb10.jpg"));
+		jb10.addActionListener(this);
 		jtb.add(jb1);
 		jtb.add(jb2);
 		jtb.add(jb3);
@@ -128,6 +143,7 @@ public class Window1 extends JFrame implements ActionListener,MouseListener{
 		jtb.add(jb9);
 		jtb.add(jb10);
 	}
+	
 	
 	public void all_panel()
 	{
@@ -185,53 +201,6 @@ public class Window1 extends JFrame implements ActionListener,MouseListener{
 		p1_ip1.add(p1_label7);
 		p1_ip1.add(p1_label8);
 		
-		//处理p2,p3,p4
-		c1 = new CardLayout();
-		c2 = new CardLayout();
-		p4 = new JPanel(new BorderLayout());
-		//p4.setPreferredSize(new Dimension(100,100));
-		p2 = new JPanel(c1);
-		p3 = new JPanel(c2);
-		//p3.setPreferredSize(new Dimension(100,100));;
-		p4.add(p2,"West");
-		p4.add(p3,"Center");
-		
-		//处理p2，两个方向的箭头
-		p2_label1 = new JLabel(new ImageIcon("image\\center_image\\jp2_left.jpg"));
-		p2_label2 = new JLabel(new ImageIcon("image\\center_image\\jp2_right.jpg"));
-		p2.add(p2_label1,"left");
-		p2.add(p2_label2,"right");
-		
-		//处理p3,
-		//先给界面贴图片，实验过后再换成实际的列表界面
-		
-		p3_label1 = new JLabel(new ImageIcon("image\\jp3_test\\jp3_1.jpg"));
-		p3_label2 = new JLabel(new ImageIcon("image\\jp3_test\\jp3_2.jpg"));
-		p3_label3 = new JLabel(new ImageIcon("image\\jp3_test\\jp3_3.jpg"));
-		p3_label4 = new JLabel(new ImageIcon("image\\jp3_test\\jp3_4.jpg"));
-		p3_label5 = new JLabel(new ImageIcon("image\\jp3_test\\jp3_5.jpg"));
-		p3_label6 = new JLabel(new ImageIcon("image\\jp3_test\\jp3_6.jpg"));
-		p3_label7 = new JLabel(new ImageIcon("image\\jp3_test\\jp3_7.jpg"));
-		
-		p3_jp1 = new UserPage();
-		p3.add(p3_jp1,"1");
-
-		//p3.add(p3_label1,"1");
-		p3.add(p3_label2,"2");
-		p3.add(p3_label3,"3");
-		p3.add(p3_label4,"4");
-		p3.add(p3_label5,"5");
-		p3.add(p3_label6,"6");
-		p3.add(p3_label7,"7");
-		
-		p4.setVisible(p4_flag);
-		
-		//拆分布局，放p1,p2,p3
-		jsp = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,true,p1,p4);
-		jsp.setDividerLocation(120);
-		//jsp.setDividerSize(0);
-		
-		
 	}
 	
 	public Window1()
@@ -245,13 +214,12 @@ public class Window1 extends JFrame implements ActionListener,MouseListener{
 		
 		this.menu();
 		
-		
 		this.tool_bar();
 		
 		this.all_panel();
 			
 		//Container
-		Container c = this.getContentPane();
+		c = this.getContentPane();
 		c.add(jtb, BorderLayout.NORTH);
 		
 		//处理P5面板
@@ -280,8 +248,8 @@ public class Window1 extends JFrame implements ActionListener,MouseListener{
 		//时间显示在屏幕右下角
 		//p5.add(timeNow,BorderLayout.EAST);
 		c.add(p5,BorderLayout.SOUTH);
-		c.add(jsp,BorderLayout.CENTER);
-		
+		//c.add(jsp,BorderLayout.CENTER);
+		c.add(p1,BorderLayout.CENTER);
 		
 		this.setIconImage(titleIcon);
 		this.setTitle("餐饮管理系统");
@@ -297,6 +265,46 @@ public class Window1 extends JFrame implements ActionListener,MouseListener{
 		// TODO Auto-generated method stub
 		this.timeNow.setText("当前时间："+Calendar.getInstance().getTime().toString());
 		
+		//处理菜单
+		//切换用户
+		if(e.getSource()==jmt1)
+		{
+			this.dispose();
+			new LoginPage();
+		}
+		//切换到收款界面
+		if(e.getSource()==jmt2)
+		{
+			//todo
+		}
+		//登录管理
+		if(e.getSource()==jmt3)
+		{
+			//todo
+		}
+		//万年历
+		if(e.getSource()==jmt4)
+		{
+			//todo
+		}
+		//退出
+		if(e.getSource()==jmt5)
+		{
+			this.dispose();
+		}
+		
+		//处理工具栏
+		//切换用户
+		if(e.getSource()==jb1)
+		{
+			this.dispose();
+			new LoginPage();
+		}
+		//帮助
+		if(e.getSource()==jb10)
+		{
+			JOptionPane.showMessageDialog(null, "欢迎使用满汉楼管理系统，有问题请联系主管，电话：123456789");
+		}
 				
 	}
 
@@ -305,31 +313,81 @@ public class Window1 extends JFrame implements ActionListener,MouseListener{
 		// TODO Auto-generated method stub
 		if(e.getSource()==this.p1_label2)
 		{
-			c2.show(p3, "1");
+			selecteditem= "userinfo";
+			//selecteditem=1;
+			MyAllPanel mlp = new MyAllPanel(selecteditem);
+			p1.removeAll();
+			p1.repaint();
+			p1.add(mlp);
+			p1.revalidate();
+			
+			//c2.show(p3, "1");
 		}
 		if(e.getSource()==this.p1_label3)
 		{
-			c2.show(p3, "2");
+			selecteditem= "logininfo";
+			//selecteditem=2;
+			MyAllPanel mlp = new MyAllPanel(selecteditem);
+			p1.removeAll();
+			p1.repaint();
+			p1.add(mlp);
+			p1.revalidate();
+			//c2.show(p3, "2");
 		}
 		if(e.getSource()==this.p1_label4)
 		{
-			c2.show(p3, "3");
+			selecteditem= "menuinfo";
+			//selecteditem=3;
+			MyAllPanel mlp = new MyAllPanel(selecteditem);
+			p1.removeAll();
+			p1.repaint();
+			p1.add(mlp);
+			p1.revalidate();
+			//c2.show(p3, "3");
 		}
 		if(e.getSource()==this.p1_label5)
 		{
-			c2.show(p3, "4");
+			selecteditem= "reportinfo";
+			//selecteditem=4;
+			MyAllPanel mlp = new MyAllPanel(selecteditem);
+			p1.removeAll();
+			p1.repaint();
+			p1.add(mlp);
+			p1.revalidate();
+			//c2.show(p3, "4");
 		}
 		if(e.getSource()==this.p1_label6)
 		{
-			c2.show(p3, "5");
+			//selecteditem=5;
+			selecteditem= "costinfo";
+			MyAllPanel mlp = new MyAllPanel(selecteditem);
+			p1.removeAll();
+			p1.repaint();
+			p1.add(mlp);
+			p1.revalidate();
+			//c2.show(p3, "5");
 		}
 		if(e.getSource()==this.p1_label7)
 		{
-			c2.show(p3, "6");
+			selecteditem= "systeminfo";
+			//selecteditem=6;
+			MyAllPanel mlp = new MyAllPanel(selecteditem);
+			p1.removeAll();
+			p1.repaint();
+			p1.add(mlp);
+			p1.revalidate();
+			//c2.show(p3, "6");
 		}
 		if(e.getSource()==this.p1_label8)
 		{
-			c2.show(p3, "7");
+			selecteditem= "videoinfo";
+			//selecteditem=7;
+			MyAllPanel mlp = new MyAllPanel(selecteditem);
+			p1.removeAll();
+			p1.repaint();
+			p1.add(mlp);
+			p1.revalidate();
+			//c2.show(p3, "7");
 		}
 	}
 
@@ -411,5 +469,6 @@ public class Window1 extends JFrame implements ActionListener,MouseListener{
 			this.p1_label8.setEnabled(false);
 		}
 	}
+
 
 }

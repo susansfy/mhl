@@ -131,6 +131,54 @@ public class MenuPage extends JPanel implements ActionListener{
 			this.p3_label.setText("共有"+row_num+"行数据");
 					
 		}
+		//删除按钮
+		if(e.getSource()==p4_bt3)
+		{
+			int selectedrow;
+			selectedrow = jt.getSelectedRow();
+			if(selectedrow==-1)
+			{
+				JOptionPane.showMessageDialog(null, "请选择一行数据进行操作");
+			}else {
+				//删除弹窗处理
+				int confirmdialog = JOptionPane.showConfirmDialog(null, "是否确认删除该条记录？","",JOptionPane.YES_NO_OPTION);
+				if(confirmdialog==0) {
+					String menuid= mm.getValueAt(selectedrow, 0).toString();
+					sql = "delete from menu where foodid=?";
+					params = new String[] {menuid};
+					MenuModel temp=new MenuModel();
+					temp.updatemenu(sql, params);
+					
+					mm = new MenuModel();
+					sql = "select * from menu where 1=?";
+					params = new String[] {"1"};
+					mm.querymenu(sql, params);
+					jt.setModel(mm);
+					row_num = mm.getRowCount();
+					this.p3_label.setText("共有"+row_num+"行数据");
+					
+					JOptionPane.showMessageDialog(null, "删除成功");
+				}
+			}
+		}
+		//修改按钮
+		if(e.getSource()==p4_bt2)
+		{
+			int selectedrow;
+			selectedrow = jt.getSelectedRow();
+			if(selectedrow==-1)
+			{
+				JOptionPane.showMessageDialog(null, "请选择一行数据进行操作");
+			}else {
+				//弹窗修改界面
+				UpdateMenuDialog umd=new UpdateMenuDialog(null,"修改菜谱",true,mm,selectedrow);
+				sql = "select * from menu where 1=?";
+				params = new String[] {"1"};
+				mm=new MenuModel();
+				mm.querymenu(sql, params);
+				jt.setModel(mm);
+			}
+		}
 		
 	}
 
